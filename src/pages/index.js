@@ -22,10 +22,10 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Container className="w-25">
+      <Container className="w-20">
         <Sidebar onItemChange={setSelectedCategory} items={sidebarItems} />
       </Container>
-      <Container className="w-75">
+      <Container className="w-80">
         {questions.map((q, i) => (
           <Card key={i} className="mb-25" title={q.q} answer={q.a} />
         ))}
