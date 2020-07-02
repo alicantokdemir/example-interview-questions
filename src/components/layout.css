@@ -662,6 +662,11 @@ img {
     /** too small to split on small screens */
     width: 100%;
   }
+
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .h-full {
