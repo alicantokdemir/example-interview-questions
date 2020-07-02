@@ -41,7 +41,82 @@ login(123) // true
 </pre>
 `
     },
+    {
+      q: `Make a function to remove duplicated characters in a string`,
+      a: `
+        <p>There are couple of ways to do this</p>
+<p>1. using indexOf and filter</p>
+<pre>
+<code>
+function removeDuplicates(str) {
+  return str.split('')
+    .filter((char, i, arr) => {
+      // so if there are duplicate characters, indexOf will return the first found character's index 
+      // if its not equal that means that character is duplicated 
+      return arr.indexOf(char) === i;
+    })
+    .join('');
+}
+</code>
+</pre>
 
+<p>2. using Set (ES6)</p>
+<pre>
+<code>
+function removeDuplicates(str) {
+  const newSet = new Set(str.split(''));
+  return Array.from(newSet).join('');
+}
+</code>
+</pre>
+
+<p>3. using Map (ES6) (we use Map instead of a regular object because we want to maintain property insertion order)</p>
+<pre>
+<code>
+function removeDuplicates(str) {
+  const newMap = new Map();
+  str.split('')
+    .forEach((char, i) => {
+      if(!newMap.has(char)) {
+        newMap.set(char, char);
+      }
+    });
+
+  return Array.from(newMap.keys()).join('');
+}
+</code>
+</pre>
+      `
+    },
+    {
+      q: `Make a function to reverse characters in a string`,
+      a: `
+        <p>There are couple of ways to do this</p>
+<p>1. using split, reverse and join</p>
+<pre>
+<code>
+function reverseStr(str) {
+  return str.split('')
+    .reverse()
+    .join('');
+}
+</code>
+</pre>
+
+<p>2. using a loop and an extra array</p>
+<pre>
+<code>
+function reverseStr(str) {
+  const reverseStrArr = [];
+  for(let i = str.length - 1; i >= 0; i--) {
+    reverseStrArr.push(str[i]);
+  }
+  return reverseStrArr.join('');
+}
+</code>
+</pre>
+      `
+    }
   ],
   htmlCss: [
     {
