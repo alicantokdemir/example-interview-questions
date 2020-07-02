@@ -1,22 +1,39 @@
-import React from "react"
-import { Link } from "gatsby"
+import React, { useState, useMemo } from "react";
+import { Link } from "gatsby";
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import Layout from "../components/layout";
+import Container from "../components/container";
+import Card from "../components/card";
+import Sidebar from "../components/sidebar";
+import SEO from "../components/seo";
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+import { questionsData } from '../data/questions';
 
-export default IndexPage
+const sidebarItems = [
+  { text: 'Javascript', value: 'javascript' },
+  { text: 'HTML/CSS', value: 'htmlCss' },
+];
+
+const IndexPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState(sidebarItems[0].value);
+
+  const questions = useMemo(() => questionsData[selectedCategory], [selectedCategory]);
+
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <Container className="w-25">
+        <Sidebar onItemChange={setSelectedCategory} items={sidebarItems} />
+      </Container>
+      <Container className="w-75">
+        {questions.map((q, i) => (
+          <Card key={i} className="mb-25" title={q.q} answer={q.a} />
+        ))}
+      </Container>
+      {/* <Link to="/page-2/">Go to page 2</Link> <br />
+      <Link to="/using-typescript/">Go to "Using TypeScript"</Link> */}
+    </Layout>
+  );
+};
+
+export default IndexPage;
